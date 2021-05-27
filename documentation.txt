@@ -1,0 +1,51 @@
+* From Google Cloud Platform
+
+1. Create Cluster
+
+    * configure zone (europe-west1-c for example)
+
+    * configure kubernetes version (1.19.9-gke.1400 for example)
+
+    * configure amount of nodes (if 1 for this zone accumulates to 4 in total)
+
+    * configure machine (N1 series, g1-small Machine Type for example)
+
+2. Initialize the GCloud SDK
+
+    * cloud.google.com/sdk/docks/quickstarts (follow the steps, download tar.gz file, extract it and run from there the following)
+
+    * ./google-cloud-sdk/bin/gcloud init
+
+    * [1] Re-initialize this configuration [default] with new settings (of there is a default one)
+
+    * Pick project
+
+    * Pick Region and Zone (europe-west1-c has to match the one from Cluster creation)
+
+3. Create gcloud kubernetes Cluster
+
+    * ./google-cloud-sdk/bin/gcloud container clusters get-credentials ticketing-dev (test using * kubectl get pods)
+
+4. Create Ingress Controller, go to https://kubernetes.github.io/ingress-nginx/deploy/#gce-gke and follow the steps
+
+    * kubectl create clusterrolebinding cluster-admin-binding \
+      --clusterrole cluster-admin \
+      --user $(gcloud config get-value account)
+
+    * kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.46.0/deploy/static/provider/cloud/deploy.yaml
+
+5. Run * skaffold dev. If kind of "unauthorized", "credentials" error shows, follow some of the steps:
+    
+    ?*1. ./google-cloud-sdk/bin/gcloud auth login - login in gcloud 
+    
+    ?*2. ./google-cloud-sdk/bin/gcloud services enable containerregistry.googleapis.com
+
+    ?*3. ./google-cloud-sdk/bin/gcloud auth configure-docker - it updates the JSON config file in my $HOME: [/home/{username}/.docker/config.json]
+
+    ?*4. ./google-cloud-sdk/bin/gcloud components install docker-credential-gcr
+
+    *5. ./google-cloud-sdk/bin/gcloud auth application-default login
+
+6. Delete gcloud kubernetes cluster
+
+    * ./google-cloud-sdk/bin/gcloud container clusters delete <cluster name>
