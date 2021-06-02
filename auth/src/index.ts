@@ -1,12 +1,28 @@
 import express from 'express';
+import 'express-async-errors'; // handles async errors
 import { json } from 'body-parser';
+
+import { errorHandler, NotFoundError } from './services';
+import {
+  currentUserRouter,
+  signinRouter,
+  signoutRouter,
+  signupRouter,
+} from './routes';
 
 const app = express();
 app.use(json());
 
-app.get('/api/users/currentuser', (req, res) => {
-  res.send('Hello from GCloud!');
+app.use(currentUserRouter);
+app.use(signinRouter);
+app.use(signoutRouter);
+app.use(signupRouter);
+
+app.all('*', async (req, res, next) => {
+  throw new NotFoundError();
 });
+
+app.use(errorHandler);
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
