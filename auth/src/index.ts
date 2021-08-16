@@ -13,7 +13,7 @@ import {
 } from './routes';
 
 const app = express();
-app.set('trust proxy', true); // express is aware that is behid the proxy of nxinx
+app.set('trust proxy', true); // express is aware that is behid the proxy of nginx
 app.use(json());
 app.use(
   cookieSession({
@@ -34,6 +34,10 @@ app.all('*', (req, res, next) => {
 app.use(errorHandler);
 
 const start = async () => {
+  if (!process.env.JWT_KEY) {
+    throw new Error('JWT_KEY must be defined!');
+  }
+
   try {
     await mongoose.connect('mongodb://auth-mongo-srv:27017/auth', {
       useNewUrlParser: true,
