@@ -5,8 +5,10 @@ import { app } from '../app';
 let mongo: any;
 
 beforeAll(async () => {
-  mongo = await MongoMemoryServer.create();
-  const mongoUri = mongo.getUri();
+  process.env.JWT_KEY = 'asdf';
+
+  mongo = await MongoMemoryServer.create({ binary: { version: '4.4.8' } }); //mongodb 5 without avx requires under 5 version
+  const mongoUri = await mongo.getUri();
 
   await mongoose.connect(mongoUri, {
     useNewUrlParser: true,
@@ -23,6 +25,6 @@ beforeEach(async () => {
 });
 
 afterAll(async () => {
-  await mongoose.stop();
+  await mongoose.disconnect();
   await mongoose.connection.close();
 });
