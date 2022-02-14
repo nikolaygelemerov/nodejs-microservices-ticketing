@@ -12,7 +12,8 @@ import {
 } from './routes';
 
 const app = express();
-app.set('trust proxy', true); // express is aware that is behid the proxy of nginx
+
+app.set('trust proxy', true); // express is aware that is behind the proxy of nginx (ingress controller)
 app.use(json());
 app.use(
   cookieSession({
