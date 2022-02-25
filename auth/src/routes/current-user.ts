@@ -6,7 +6,7 @@ import { currentUser, requireAuth } from '../services';
 const router = express.Router();
 
 router.get('/api/users/currentuser', currentUser, requireAuth, (req, res) => {
-  res.send(req.currentUser);
+  res.send({ currentUser: req.currentUser });
 });
 
 export default router;
