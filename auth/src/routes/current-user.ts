@@ -1,7 +1,6 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 
-import { currentUser, requireAuth } from '../services';
+import { currentUser, requireAuth } from '@ngeltickets/common';
 
 const router = express.Router();
 

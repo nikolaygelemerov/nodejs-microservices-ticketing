@@ -3,7 +3,8 @@ import 'express-async-errors'; // handles async errors
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 
-import { errorHandler, NotFoundError } from './services';
+import { errorHandler, NotFoundError } from '@ngeltickets/common';
+
 import {
   currentUserRouter,
   signinRouter,
