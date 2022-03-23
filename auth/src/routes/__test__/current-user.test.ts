@@ -10,7 +10,7 @@ it('responds with details about the current user', async () => {
     .send()
     .expect(200);
 
-  expect(response.body.email).toEqual('john@john.com');
+  expect(response.body.currentUser.email).toEqual('john@john.com');
 });
 
 it('responds with 401 if not authenticated', async () => {

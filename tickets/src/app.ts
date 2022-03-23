@@ -3,7 +3,9 @@ import 'express-async-errors'; // handles async errors
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 
-import { errorHandler, NotFoundError } from '@ngeltickets/common';
+import { createTicketRouter } from './routes';
+
+import { currentUser, errorHandler, NotFoundError } from '@ngeltickets/common';
 
 const app = express();
 
@@ -15,6 +17,10 @@ app.use(
     secure: process.env.NODE_ENV !== 'test', // require https
   })
 );
+
+app.use(currentUser);
+
+app.use(createTicketRouter);
 
 app.all('*', (req, res, next) => {
   throw new NotFoundError();
