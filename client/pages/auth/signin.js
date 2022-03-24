@@ -45,7 +45,6 @@ export default () => {
           Password
         </label>
         <input
-          type="password"
           className="form-control"
           id="password"
           onChange={(e) => setPassword(e.target.value)}

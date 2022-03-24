@@ -2,7 +2,7 @@ import request from 'supertest';
 import { app } from '../../app';
 
 it('returns a 201 on successful signup', async () => {
-  return signup();
+  return global.signup();
 });
 
 it('returns a 400 with an invalid email', async () => {
@@ -38,7 +38,7 @@ it('returns a 400 with missing email and password', async () => {
 });
 
 it('disallows duplicate emails', async () => {
-  await signup();
+  await global.signup();
 
   await request(app)
     .post('/api/users/signup')
@@ -50,7 +50,7 @@ it('disallows duplicate emails', async () => {
 });
 
 it('sets a cookie after successful signup', async () => {
-  const cookie = await signup();
+  const cookie = await global.signup();
 
   expect(cookie).toBeDefined();
 });

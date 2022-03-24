@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-microservices-ticketing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolaygelemerov/nodejs-microservices-ticketing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikolaygelemerov/nodejs-microservices-ticketing/issues"
+  },
+  "homepage": "https://github.com/nikolaygelemerov/nodejs-microservices-ticketing#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "eslint-plugin-react": "^7.29.4"
+  }
+}
