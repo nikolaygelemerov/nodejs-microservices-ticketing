@@ -3,7 +3,12 @@ import 'express-async-errors'; // handles async errors
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 
-import { createTicketRouter, showTicketRouter } from './routes';
+import {
+  createTicketRouter,
+  showTicketRouter,
+  shoAllTicketsRouter,
+  updateTicketRouter,
+} from './routes';
 
 import { currentUser, errorHandler, NotFoundError } from '@ngeltickets/common';
 
@@ -22,6 +27,8 @@ app.use(currentUser);
 
 app.use(createTicketRouter);
 app.use(showTicketRouter);
+app.use(shoAllTicketsRouter);
+app.use(updateTicketRouter);
 
 app.all('*', (req, res, next) => {
   throw new NotFoundError();

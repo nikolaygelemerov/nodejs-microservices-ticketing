@@ -5,9 +5,11 @@ import request from 'supertest';
 import { app } from '../app';
 
 declare global {
+  // eslint-disable-next-line no-var
   var signup: () => Promise<string[]>;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let mongo: any;
 
 beforeAll(async () => {
@@ -25,7 +27,7 @@ beforeAll(async () => {
 beforeEach(async () => {
   const collections = await mongoose.connection.db.collections();
 
-  for (let collection of collections) {
+  for (const collection of collections) {
     await collection.deleteMany({});
   }
 });
