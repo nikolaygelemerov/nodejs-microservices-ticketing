@@ -16,3 +16,7 @@ yarn-error.log
 # yarn.lock
 
 common/.git/
+
+kubectl
+minikube-linux-amd64
+skaffold
